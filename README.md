@@ -1,2 +1,2 @@
 # pythonBackend
-LEarn backend development in python
+Learn backend development in python
