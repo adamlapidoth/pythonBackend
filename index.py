@@ -6,8 +6,15 @@ class BasicRequestHandler(tornado.web.RequestHandler):
         self.write("Hello World! this is a python command")
 
 
+class ListRequestHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("index.html")
+
+
 if __name__ == "__main__":
-    app = tornado.web.Application([("/", BasicRequestHandler)])
+    app = tornado.web.Application(
+        [("/", BasicRequestHandler), ("/animal", ListRequestHandler)]
+    )
 
     port = 8882
     app.listen(port)
