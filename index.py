@@ -1,3 +1,5 @@
+import json
+
 import tornado.ioloop
 
 
@@ -29,6 +31,13 @@ class ResourceParamRequestHandler(tornado.web.RequestHandler):
         )
 
 
+class FruitRequestHandler(tornado.web.RequestHandler):
+    def get(self):
+        with open("fruits.txt") as f:
+            fruits = f.read().splitlines()
+            self.write(json.dumps(fruits))
+
+
 if __name__ == "__main__":
     app = tornado.web.Application(
         [
@@ -36,6 +45,7 @@ if __name__ == "__main__":
             ("/animal", ListRequestHandler),
             ("/isEven", QueryParamRequestHandler),
             ("/students/([a-z]+)/([0-9]+)", ResourceParamRequestHandler),
+            ("/fruits", FruitRequestHandler),
         ]
     )
 
