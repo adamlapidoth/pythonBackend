@@ -21,12 +21,21 @@ class QueryParamRequestHandler(tornado.web.RequestHandler):
             self.write(f"{num} is not a valid integer")
 
 
+class ResourceParamRequestHandler(tornado.web.RequestHandler):
+    def get(self, student_name, course_id):
+        self.write(
+            f"Welcome {student_name} "
+            f"the course you are viewing is {course_id}"
+        )
+
+
 if __name__ == "__main__":
     app = tornado.web.Application(
         [
             ("/", BasicRequestHandler),
             ("/animal", ListRequestHandler),
             ("/isEven", QueryParamRequestHandler),
+            ("/students/([a-z]+)/([0-9]+)", ResourceParamRequestHandler),
         ]
     )
 
