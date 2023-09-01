@@ -37,6 +37,12 @@ class FruitRequestHandler(tornado.web.RequestHandler):
             fruits = f.read().splitlines()
             self.write(json.dumps(fruits))
 
+    def post(self):
+        fruit = self.get_argument("fruit")
+        with open("fruits.txt", "a") as f:
+            f.write(f"{fruit}\n")
+        self.write(json.dumps({"message": "fruit added successfully"}))
+
 
 if __name__ == "__main__":
     app = tornado.web.Application(
