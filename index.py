@@ -44,6 +44,11 @@ class FruitRequestHandler(tornado.web.RequestHandler):
         self.write(json.dumps({"message": "fruit added successfully"}))
 
 
+class MainRequestHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("main.html")
+
+
 if __name__ == "__main__":
     app = tornado.web.Application(
         [
@@ -52,6 +57,7 @@ if __name__ == "__main__":
             ("/isEven", QueryParamRequestHandler),
             ("/students/([a-z]+)/([0-9]+)", ResourceParamRequestHandler),
             ("/fruits", FruitRequestHandler),
+            ("/main", MainRequestHandler),
         ]
     )
 
