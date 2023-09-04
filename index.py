@@ -1,6 +1,12 @@
+import argparse
 import json
 
 import tornado.ioloop
+
+# Create the parser and add arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--port", help="Port number for app to run on")
+PORT = int(parser.parse_args().port)
 
 
 class BasicRequestHandler(tornado.web.RequestHandler):
@@ -61,7 +67,6 @@ if __name__ == "__main__":
         ]
     )
 
-    port = 8882
-    app.listen(port)
-    print(f"Application is ready and listening on port {port}")
+    app.listen(PORT)
+    print(f"Application is ready and listening on port {PORT}")
     tornado.ioloop.IOLoop.current().start()
