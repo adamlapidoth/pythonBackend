@@ -17,7 +17,8 @@ Fruits
     const lstFruit = document.getElementById("lstFruit")
     const addFruit = document.getElementById("btnAdd")
     const txtFruit = document.getElementById("txtFruit")
-    fetch("http://localhost:8882/fruits")
+    let port = window.location.port
+    fetch(`http://localhost:${port}/fruits`)
         .then(response => response.json())
         .then(jsonResponse => jsonResponse.forEach(fruit => {
             let o = document.createElement("option")
@@ -27,7 +28,7 @@ Fruits
 
     addFruit.addEventListener("click", () => {
         let fruit = txtFruit.value
-        fetch(`http://localhost:8882/fruits?fruit=${fruit}`, {"method": "POST"})
+        fetch(`http://localhost:${port}/fruits?fruit=${fruit}`, {"method": "POST"})
             .then(response => response.json())
             .then(jsonResponse => alert(jsonResponse.message))
     })
